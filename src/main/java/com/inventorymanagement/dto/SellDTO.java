@@ -3,9 +3,9 @@ package com.inventorymanagement.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 
 public class SellDTO implements Serializable {
 	private Long id;
