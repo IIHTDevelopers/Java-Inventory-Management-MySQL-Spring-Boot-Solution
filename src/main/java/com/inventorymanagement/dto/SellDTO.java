@@ -1,32 +1,37 @@
 package com.inventorymanagement.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 
-public class ProductDTO implements Serializable {
+public class SellDTO implements Serializable {
 	private Long id;
 
-	@NotEmpty(message = "Product name is required")
-	@Size(min = 3, max = 255, message = "Product name must be between 3 and 255 characters")
-	private String name;
+	@NotNull(message = "Product ID is required")
+	private Long productId;
 
-	@DecimalMin(value = "0.01", message = "Product price must be greater than 0.01")
-	private Double price;
+	@NotNull(message = "Quantity is required")
+	@Max(value = 1000, message = "Quantity cannot exceed 1000")
+	private Integer quantity;
 
-	public ProductDTO() {
+	@PastOrPresent(message = "Order date must be in the past or present")
+	private Date orderDate;
+
+	public SellDTO() {
 		super();
 	}
 
-	public ProductDTO(Long id,
-			@NotEmpty(message = "Product name is required") @Size(min = 3, max = 255, message = "Product name must be between 3 and 255 characters") String name,
-			@DecimalMin(value = "0.01", message = "Product price must be greater than 0.01") Double price) {
+	public SellDTO(Long id, @NotNull(message = "Product ID is required") Long productId,
+			@NotNull(message = "Quantity is required") @Max(value = 1000, message = "Quantity cannot exceed 1000") Integer quantity,
+			@PastOrPresent(message = "Order date must be in the past or present") Date orderDate) {
 		super();
 		this.id = id;
-		this.name = name;
-		this.price = price;
+		this.productId = productId;
+		this.quantity = quantity;
+		this.orderDate = orderDate;
 	}
 
 	public Long getId() {
@@ -37,24 +42,33 @@ public class ProductDTO implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public Long getProductId() {
+		return productId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setProductId(Long productId) {
+		this.productId = productId;
 	}
 
-	public Double getPrice() {
-		return price;
+	public Integer getQuantity() {
+		return quantity;
 	}
 
-	public void setPrice(Double price) {
-		this.price = price;
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+	public Date getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
 	}
 
 	@Override
 	public String toString() {
-		return "ProductDTO [id=" + id + ", name=" + name + ", price=" + price + "]";
+		return "SellDTO [id=" + id + ", productId=" + productId + ", quantity=" + quantity + ", orderDate=" + orderDate
+				+ "]";
 	}
 }
